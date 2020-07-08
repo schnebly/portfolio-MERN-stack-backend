@@ -9,4 +9,5 @@ const router = express.Router();
 // @access  Public
 router.get('/', (req, res) => res.send('Posts route'));
 
+// exports
 module.exports = router;

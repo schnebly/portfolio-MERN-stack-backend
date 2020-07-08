@@ -9,4 +9,5 @@ const router = express.Router();
 // @access  Public
 router.get('/', (req, res) => res.send('Profile route'));
 
+// exports
 module.exports = router;

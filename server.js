@@ -1,6 +1,6 @@
 /* 
     Author: James Schnebly
-    File: Server.js
+    File: server.js
     Purpose: Node backend using express to serve API's
 */
 
@@ -13,6 +13,9 @@ const app = express();
 
 // connect to db
 connectDB();
+
+// init middleware
+app.use(express.json({ extended: false }));
 
 // Define REST routes
 app.get('/', (req, res) => res.send('API Running'));
