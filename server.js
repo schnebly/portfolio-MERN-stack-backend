@@ -1,3 +1,10 @@
+/* 
+    Author: James Schnebly
+    File: Server.js
+    Purpose: Node backend using express to serve API's
+*/
+
+// imports
 const express = require('express');
 
 // init express server app
