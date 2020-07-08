@@ -1,8 +1,8 @@
 // imports
-const mongoose = requrie('mongoose');
+const mongoose = require('mongoose');
 
 // User Schema for MongoDB
-const UserSchema = new mongoose.UserSchema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         requried: true
