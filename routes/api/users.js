@@ -3,6 +3,8 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 const gravatar = require('gravatar');
 const bcrpt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 // get my User model
 const User = require('../../models/User');
@@ -13,7 +15,8 @@ const router = express.Router();
 // @route   POST api/users
 // @desc    Register user with express-validator validation
 // @access  Public
-router.post('/', [
+router.post('/', 
+[
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
@@ -53,7 +56,21 @@ async (req, res) => {
         await user.save();
 
         // return JWT
-        res.send('User registered');
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(
+            payload, 
+            config.get('jwtsecret'), 
+            { expiresIn: 360000 },
+            (err, token) => {
+                if(err) throw err;
+                res.json({ token });
+            }   
+        );
 
     } catch (error) {
         console.error(error);
